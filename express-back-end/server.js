@@ -1,22 +1,22 @@
-const Express = require('express');
-const App = Express();
-const BodyParser = require('body-parser');
-const PORT = 8080;
+// const Express = require('express');
+// const App = Express();
+// const BodyParser = require('body-parser');
+// const PORT = 8080;
 
-// Express Configuration
-App.use(BodyParser.urlencoded({ extended: false }));
-App.use(BodyParser.json());
-App.use(Express.static('public'));
+// // Express Configuration
+// App.use(BodyParser.urlencoded({ extended: false }));
+// App.use(BodyParser.json());
+// App.use(Express.static('public'));
 
-// Sample GET route
-App.get('/api/data', (req, res) => res.json({
-  message: "Seems to work!",
-}));
+// // Sample GET route
+// App.get('/api/data', (req, res) => res.json({
+//   message: "Seems to work!",
+// }));
 
-App.listen(PORT, () => {
-  // eslint-disable-next-line no-console
-  console.log(`Express seems to be listening on port ${PORT} so that's pretty good 👍`);
-});
+// App.listen(PORT, () => {
+//   // eslint-disable-next-line no-console
+//   console.log(`Express seems to be listening on port ${PORT} so that's pretty good 👍`);
+// });
 
 
 const Express = require('express');
@@ -59,17 +59,15 @@ let players = {};
 setInterval(() => {
   const rawdata = fs.readFileSync('players.json');
   players = JSON.parse(rawdata);
-
   const newPlayersList = randomizPlayers(players);
   
-  console.log(newPlayersList)
   let data = JSON.stringify(newPlayersList);
   fs.writeFileSync('players.json', data);
   
 }, 4000);
 
 // Sample GET route
-console.log(players)
+
 App.get('/api/data', (req, res) => res.json(players));
 
 App.listen(PORT, () => {
