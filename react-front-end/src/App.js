@@ -36,3 +36,41 @@ class App extends Component {
 }
 
 export default App;
+
+
+// import React from 'react';
+// import './App.css';
+
+// const players = [
+// "Mohammad", "Mohsen", "Parsa", 
+// "Milad Ah.", "Milad", "Ramin",
+// "Ali Z", "Ali T", "Faraz", 
+// "Vahid", "MJ", "Mahziyar",
+// "Shayan", "Ehsan", "Mehdi"
+// ];
+
+
+// function App() {
+//   return (
+// <table id="team">
+//   <tr>
+//     <th>Team A</th>
+//     <th>Team B</th>
+//     <th>Team C</th>
+//   </tr>
+
+//     { teams["0"].map((element, i) => 
+//           <tr key={i}>
+//            <td>{teams["0"][i]}</td>
+//            <td>{teams["1"][i]}</td>
+//            <td>{teams["2"][i]}</td>
+//          </tr>
+//     )
+       
+//     }
+
+//   </table>
+//   );
+// }
+
+// export default App;
