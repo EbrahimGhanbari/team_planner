@@ -1,5 +1,6 @@
 
 
+const {createServer} = require('http')
 const Express = require('express');
 const App = Express();
 const compression = require('compression')
@@ -13,10 +14,26 @@ const PORT = 8080;
 // Express Configuration
 App.use(BodyParser.urlencoded({ extended: false }));
 App.use(BodyParser.json());
-App.use(Express.static('public'));
+// App.use(Express.static('public'));
 
+const dev = App.get('env') !== 'production';
 
+if (dev) {
+  App.disable('x-powered-by');
+  App.use(compression());
+  App.use(morgan('common'));
 
+  App.use(Express.static(path.resolve('../react-front-end', 'build')))
+
+  App.get('*', (req, res) => {
+    res.sendFile(path.resolve('../react-front-end', 'public', 'index.html'))
+  })
+  App.get('/api/data', (req, res) => res.json(players));
+}
+
+// if (dev) {
+//   App.use(morgan('dev'));
+// }
 
 
 
@@ -58,9 +75,12 @@ setInterval(() => {
 
 
 
+const server = createServer(App);
 // Sample GET route
+// App.get('/api/data', (req, res) => res.json(players));
 
-App.get('/api/data', (req, res) => res.json(players));
+
+
 
 App.listen(PORT, () => {
   // eslint-disable-next-line no-console
