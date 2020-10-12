@@ -7,6 +7,7 @@ const path = require('path')
 const morgan = require('morgan')
 const fs = require('fs');
 const BodyParser = require('body-parser');
+const cors = require('cors');
 
 const PORT = 8080;
 
@@ -18,9 +19,9 @@ App.use(Express.static('public'));
 
 if (process.env.NODE_ENV === 'production') {
   // Serve any static files
-  app.use(express.static(path.join(__dirname, 'client/build')));
-// Handle React routing, return all requests to React app
-  app.get('*', function(req, res) {
+  App.use(express.static(path.join(__dirname, 'client/build')));
+// Handle React routing, return all requests to React App
+  App.get('*', function(req, res) {
     res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
   });
 }
@@ -38,7 +39,7 @@ const corsOptions = {
     }
   }
 }
-app.use(cors(corsOptions))
+App.use(cors(corsOptions))
 
 
 
