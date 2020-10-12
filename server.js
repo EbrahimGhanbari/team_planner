@@ -19,7 +19,7 @@ App.use(Express.static('public'));
 
 if (process.env.NODE_ENV === 'production') {
   // Serve any static files
-  App.use(express.static(path.join(__dirname, 'client/build')));
+  App.use(Express.static(path.join(__dirname, 'client/build')));
 // Handle React routing, return all requests to React App
   App.get('*', function(req, res) {
     res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
