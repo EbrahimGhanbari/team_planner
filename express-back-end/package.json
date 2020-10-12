@@ -1,6 +1,9 @@
 {
   "name": "express-back-end",
   "version": "1.0.0",
+  "engines": {
+    "node": "8.x"
+  },
   "description": "Boilerplate for the Express backend in an Express-React project",
   "main": "server.js",
   "author": "garrettgsb",
