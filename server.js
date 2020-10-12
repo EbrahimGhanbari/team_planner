@@ -88,7 +88,7 @@ setInterval(() => {
 
 App.get('/api/data', (req, res) => res.json(players));
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 App.listen(PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`Express seems to be listening on port ${PORT} so that's pretty good 👍`);
