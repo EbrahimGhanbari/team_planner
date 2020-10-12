@@ -9,7 +9,7 @@ const fs = require('fs');
 const BodyParser = require('body-parser');
 const cors = require('cors');
 
-const PORT = 8080;
+
 
 // Express Configuration
 App.use(BodyParser.urlencoded({ extended: false }));
@@ -88,6 +88,7 @@ setInterval(() => {
 
 App.get('/api/data', (req, res) => res.json(players));
 
+const PORT = process.env.PORT || 3000;
 App.listen(PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`Express seems to be listening on port ${PORT} so that's pretty good 👍`);
