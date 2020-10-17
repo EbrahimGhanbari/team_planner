@@ -9,6 +9,7 @@ function App() {
   useEffect(() => {
     axios.get('/api/data') // You can simply make your requests to "/api/whatever you want"
     .then((response) => {
+      console.log(response.data);
       // handle success
       const allPlayers = Object.values(response.data);
       const teamsOfThree = [];

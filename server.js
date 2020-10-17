@@ -17,14 +17,7 @@ App.use(BodyParser.json());
 App.use(Express.static('public'));
 
 
-if (process.env.NODE_ENV === 'production') {
-  // Serve any static files
-  App.use(Express.static(path.join(__dirname, 'client/build')));
-// Handle React routing, return all requests to React App
-  App.get('*', function(req, res) {
-    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-  });
-}
+
 
 const whitelist = ['http://localhost:3000', 'http://localhost:8080', 'https://shrouded-journey-38552.herokuapp.com']
 const corsOptions = {
@@ -85,8 +78,19 @@ setInterval(() => {
 
 
 // Sample GET route
+if (process.env.NODE_ENV === 'production') {
+  // Serve any static files
+  // App.use(Express.static(path.join(__dirname, 'client/build')));
+// Handle React routing, return all requests to React App
+
+  App.get('/api/data', (req, res) => res.json(players));
+  // App.get('*', function(req, res) {
+  //   res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+  // });
+}
 
 App.get('/api/data', (req, res) => res.json(players));
+
 
 const PORT = process.env.PORT || 8080;
 App.listen(PORT, () => {
