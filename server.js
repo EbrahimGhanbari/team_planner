@@ -55,7 +55,7 @@ function randomizPlayers(playerObject) {
 }
 
 function readPlayers(fileName) {
-  const rawdata = fs.readFileSync("players.json");
+  const rawdata = fs.readFileSync(fileName);
   return JSON.parse(rawdata);
 }
 
@@ -73,13 +73,13 @@ setInterval(() => {
 
 // Sample GET route
 // if (process.env.NODE_ENV === "production") {
-  // Serve any static files
-  App.use(Express.static(path.join(__dirname, "client/build")));
-  // Handle React routing, return all requests to React App
+// Serve any static files
+App.use(Express.static(path.join(__dirname, "client/build")));
+// Handle React routing, return all requests to React App
 
-  // App.get("*", function (req, res) {
-  //   res.sendFile(path.join(__dirname, "client/build", "index.html"));
-  // });
+// App.get("*", function (req, res) {
+//   res.sendFile(path.join(__dirname, "client/build", "index.html"));
+// });
 // }
 App.get("/api/data", (req, res) => res.json(players));
 

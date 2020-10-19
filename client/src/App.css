@@ -32,26 +32,40 @@
   }
 }
 
-
-#team {
+.team {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   width: 100%;
 }
 
-#team td, #team th {
+.team td,
+.team th {
   border: 1px solid #ddd;
   padding: 8px;
 }
 
-#team tr:nth-child(even){background-color: #f2f2f2;}
+.team tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
 
-#team tr:hover {background-color: #ddd;}
+.team tr:hover {
+  background-color: #ddd;
+}
 
-#team th {
+.team th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
+}
+
+.subs {
+  width: 50%;
+  margin-top: 20px;
+  margin-left: 25%;
+}
+
+.subs th {
+  background-color: rebeccapurple;
 }
