@@ -4,9 +4,10 @@ const BodyParser = require("body-parser");
 const cors = require("cors");
 const path = require("path");
 const morgan = require("morgan");
+const fs = require("fs");
 
 // import { randomizPlayers, readPlayers } from './helperFunctions';
-const { randomizPlayers, readPlayers } = require("./helperFunctions");
+const { randomizPlayers, readPlayers, getRandomIndex } = require("./helperFunctions");
 
 // Express Configuration
 App.use(BodyParser.urlencoded({ extended: false }));
@@ -32,6 +33,8 @@ const corsOptions = {
 };
 App.use(cors(corsOptions));
 
+
+
 let players = readPlayers("players.json");
 console.log(players);
 
@@ -55,6 +58,18 @@ App.use(Express.static(path.join(__dirname, "client/build")));
 // });
 // }
 App.get("/api/data", (req, res) => res.json(players));
+
+App.post("/reshuffle", (req, res) => {
+  console.log(Object.keys(req.body)[0])
+  
+  if(Object.keys(req.body)[0] === "123456789") {
+    const newPlayersList = randomizPlayers(players);
+    let data = JSON.stringify(newPlayersList);
+    
+    fs.writeFileSync("players.json", data);
+    players = readPlayers("players.json");
+  }
+})
 
 const PORT = process.env.PORT || 8080;
 App.listen(PORT, () => {

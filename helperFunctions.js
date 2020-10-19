@@ -16,9 +16,16 @@ const randomizPlayers = (playerObject) => {
   return newPlayerjson;
 };
 
+// This function read players from json
 const readPlayers = (fileName) => {
   const rawdata = fs.readFileSync(fileName);
   return JSON.parse(rawdata);
 };
 
-module.exports = { randomizPlayers, readPlayers };
+// this function generates random number
+function getRandomIndex(playerArray) {
+    const max = playerArray.length;
+    return Math.floor(Math.random() * Math.floor(max));
+  }
+
+module.exports = { randomizPlayers, readPlayers, getRandomIndex };

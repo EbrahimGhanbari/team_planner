@@ -24,7 +24,18 @@ function App() {
   }, []);
 
   const reshuffle = () => {
-    console.log("hi")
+    
+    const password = prompt('Please enter password');
+
+    // event.preventDefault();
+    axios
+      .post("http://localhost:8080/reshuffle", password)
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
 
   const subs = ["Nasser", "MohammadReza"];
@@ -69,8 +80,8 @@ function App() {
           <th>Reshuffle Players:</th>
         </tr>
         <tr>
-          <td>
-            <button onClick={reshuffle}>Click Here to reshuffle</button>
+          <td onClick={reshuffle}>
+            Click Here to Re-Shuffle
           </td>
         </tr>
         <tr>
