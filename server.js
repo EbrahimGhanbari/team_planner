@@ -1,12 +1,12 @@
 const Express = require("express");
 const App = Express();
-const fs = require("fs");
-const fsPromise = require("promise-fs");
 const BodyParser = require("body-parser");
 const cors = require("cors");
-const compression = require("compression");
 const path = require("path");
 const morgan = require("morgan");
+
+// import { randomizPlayers, readPlayers } from './helperFunctions';
+const { randomizPlayers, readPlayers } = require("./helperFunctions");
 
 // Express Configuration
 App.use(BodyParser.urlencoded({ extended: false }));
@@ -31,33 +31,6 @@ const corsOptions = {
   },
 };
 App.use(cors(corsOptions));
-
-// this function generates random number
-function getRandomIndex(playerArray) {
-  const max = playerArray.length;
-  return Math.floor(Math.random() * Math.floor(max));
-}
-
-// this function shuffles players
-function randomizPlayers(playerObject) {
-  const playersArray = Object.values(playerObject);
-  const newPlayerjson = {};
-
-  let count = 0;
-  while (playersArray.length > 0) {
-    const playerIndex = getRandomIndex(playersArray);
-    const player = playersArray.splice(playerIndex, 1);
-    newPlayerjson[count] = player[0];
-    count++;
-  }
-
-  return newPlayerjson;
-}
-
-function readPlayers(fileName) {
-  const rawdata = fs.readFileSync(fileName);
-  return JSON.parse(rawdata);
-}
 
 let players = readPlayers("players.json");
 console.log(players);
