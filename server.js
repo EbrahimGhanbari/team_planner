@@ -5,6 +5,7 @@ const cors = require("cors");
 const path = require("path");
 const morgan = require("morgan");
 const fs = require("fs");
+const {Pool} = require("pg");
 
 // import { randomizPlayers, readPlayers } from './helperFunctions';
 const { randomizPlayers, readPlayers, getRandomIndex } = require("./helperFunctions");
@@ -70,6 +71,22 @@ App.post("/reshuffle", (req, res) => {
     players = readPlayers("players.json");
   }
 })
+
+const connectionString = "postgres://zyvxqzcvlikqjy:2d201c21003d340d793443de85691da91628709a6709822092234ac675ca8f7c@ec2-52-2-82-109.compute-1.amazonaws.com:5432/d5es9rf9bdgaen";
+// const pool = new pg.Pool()
+const pool = new Pool({
+  connectionString: connectionString,
+})
+pool.connect(function(err, client, done) {
+  client.query('INSERT INTO players(players, team_index) VALUES ("Mohsen", 1);', function(err, result) {
+     done();
+     if(err) {reject(err); return;}
+     console.log(result.rows);
+  });
+});
+// pool.end()
+
+
 
 const PORT = process.env.PORT || 8080;
 App.listen(PORT, () => {
