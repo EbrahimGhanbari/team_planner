@@ -14,12 +14,6 @@ for (const player of players.main) {
     i++;
 }
 
-console.log(query)
-
-
-
-// const query = `INSERT INTO soccer_indoor (id, player_name, team_index) VALUES (1,'Mohsen', 1);`
-
 
 
 
