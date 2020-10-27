@@ -9,7 +9,7 @@ const seedPlayers = (playerList = {}) => {
   let players = playerList;
 
   if (!Object.keys(playerList).length) {
-    const allPlayers = readPlayers("./db/seeds/players.json");
+    const allPlayers = readPlayers("players.json");
     players = allPlayers.main;
   }
 
@@ -40,6 +40,8 @@ const seedPlayers = (playerList = {}) => {
   });
 
 }
+
+seedPlayers()
 
 
 module.exports = { seedPlayers };

@@ -16,11 +16,11 @@ const {
   readPlayerFromDatabase
 } = require("./helperFunctions");
 
-const { seedPlayers } = require("./db/seeds/players");
-const { createTables } = require("./db/schema/tables");
+// const { seedPlayers } = require("./db/seeds/players");
+// const { createTables } = require("./db/schema/tables");
 
 // createTables();
-seedPlayers();
+// seedPlayers();
 
 
 
