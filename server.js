@@ -32,7 +32,7 @@ App.use(Express.static("public"));
 const whitelist = [
   "http://localhost:3000",
   "http://localhost:8080",
-  "https://shrouded-journey-38552.herokuapp.com",
+  "https://indoorsoccerteams.herokuapp.com",
 ];
 const corsOptions = {
   origin: function (origin, callback) {
