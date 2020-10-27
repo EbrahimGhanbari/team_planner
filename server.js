@@ -7,7 +7,7 @@ const morgan = require("morgan");
 const pg = require("pg");
 require('dotenv').config();
 const fs = require("fs");
-const {randomizPlayers} = require("./helperFunctions");
+const { randomizPlayers } = require("./helperFunctions");
 
 
 // Express Configuration
@@ -35,53 +35,32 @@ const corsOptions = {
 };
 App.use(cors(corsOptions));
 
-
-
-// Sample GET route
-// if (process.env.NODE_ENV === "production") {
-// Serve any static files
-App.use(Express.static(path.join(__dirname, "client/build")));
-
-// }
+// Reading built file in production mode
+if (process.env.NODE_ENV === "production") {
+  App.use(Express.static(path.join(__dirname, "client/build")));
+}
 
 let players = {};
 
-
-// const conString = process.env.DATABASE_URL_ELEPHANT;
-// const client = new pg.Client(conString);
-
-// client.connect();
-
-// client.query('SELECT * FROM soccer_indoor;', function (err, result) {
-//   for (const row of result.rows) {
-
-//     players[row.team_index] = row.player_name;
-//   }
-//   client.end();
-
-// });
-
-// App.get("/api/data", (req, res) => res.json(players));
-// console.log("main api call", players);
-
+// Restarting server every 5 second
 setInterval(() => {
   const conString = process.env.DATABASE_URL_ELEPHANT;
   const client = new pg.Client(conString);
 
   client.connect();
   client.query('SELECT * FROM soccer_indoor;', function (err, result) {
+    //grab data from database and put it in a variable
     for (const row of result.rows) {
-
       players[row.team_index] = row.player_name;
     }
     client.end();
-
   });
-  console.log("inside interval", players);
+
   App.get("/api/data", (req, res) => res.json(players));
 
 }, 5000);
 
+// Handle the reshuffle request from front end
 App.post("/reshuffle", (req, res) => {
 
   if (Object.keys(req.body)[0] === "1") {
@@ -98,23 +77,6 @@ App.post("/reshuffle", (req, res) => {
     client.query(query, function (err, result) {
       client.end();
     });
-
-    // client.query('SELECT * FROM soccer_indoor;', function (err, result) {
-    //   console.log('result.rows:', result.rows)
-
-    //   for (const row of result.rows) {
-    //     players[row.team_index] = row.player_name;
-    //   }
-
-    //   client.end();
-
-    // });
-
-    // console.log("after re-shuffling", players);
-
-
-    // App.get("/api/data", (req, res) => res.json(newPlayersList))
-
   }
 });
 

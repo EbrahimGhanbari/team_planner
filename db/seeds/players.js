@@ -16,9 +16,8 @@ const seedPlayers = (playerList = {}) => {
   let query = '';
   for (const index in players) {
     query += `INSERT INTO soccer_indoor (id, player_name, team_index) VALUES (${index}, '${players[index]}', ${index});`
-    
-  }
 
+  }
 
   const conString = process.env.DATABASE_URL_ELEPHANT;
   const client = new pg.Client(conString);
