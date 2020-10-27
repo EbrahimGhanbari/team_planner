@@ -20,7 +20,7 @@ const seedPlayers = (playerList = {}) => {
   }
 
 
-  const conString = process.env.DATABASE_URL;
+  const conString = process.env.DATABASE_URL_ELEPHANT;
   const client = new pg.Client(conString);
 
   client.connect(function (err) {

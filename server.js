@@ -62,7 +62,7 @@ App.use(Express.static(path.join(__dirname, "client/build")));
 // }
 
 
-const conString = process.env.DATABASE_URL;
+const conString = process.env.DATABASE_URL_ELEPHANT;
 const client = new pg.Client(conString);
 
 client.connect();
@@ -96,7 +96,7 @@ App.post("/reshuffle", (req, res) => {
 
     }
 
-    const conString = process.env.DATABASE_URL;
+    const conString = process.env.DATABASE_URL_ELEPHANT;
     const client = new pg.Client(conString);
     client.connect();
     client.query(query);

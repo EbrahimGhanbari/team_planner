@@ -13,7 +13,7 @@ const createTables = () => {
                     player_name           TEXT NOT NULL,
                     team_index         INT      NOT NULL);`;
 
-    const conString = process.env.DATABASE_URL;
+    const conString = process.env.DATABASE_URL_ELEPHANT;
     const client = new pg.Client(conString);
 
     client.connect(function (err) {
