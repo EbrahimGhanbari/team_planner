@@ -79,10 +79,11 @@ client.query('SELECT * FROM soccer_indoor;', function (err, result) {
 });
 
 App.get("/api/data", (req, res) => res.json(players));
+console.log("main api call", players);
 
 setInterval(() => {
   
-  let players = {};
+
   const conString = process.env.DATABASE_URL_ELEPHANT;
   const client = new pg.Client(conString);
 
@@ -95,6 +96,7 @@ setInterval(() => {
     client.end();
 
   });
+  console.log("inside interval", players);
   App.get("/api/data", (req, res) => res.json(players));
 
 }, 5000);
@@ -128,6 +130,7 @@ App.post("/reshuffle", (req, res) => {
       client.end();
 
     });
+    console.log("after re-shuffling", players);
     App.get("/api/data", (req, res) => res.json(newPlayersList))
 
   }
