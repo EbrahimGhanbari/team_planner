@@ -44,14 +44,14 @@ App.use(Express.static(path.join(__dirname, "client/build")));
 
 // }
 
-
-const conString = process.env.DATABASE_URL_ELEPHANT;
-const client = new pg.Client(conString);
-
-client.connect();
-
-
 let players = {};
+
+
+// const conString = process.env.DATABASE_URL_ELEPHANT;
+// const client = new pg.Client(conString);
+
+// client.connect();
+
 // client.query('SELECT * FROM soccer_indoor;', function (err, result) {
 //   for (const row of result.rows) {
 
@@ -81,8 +81,6 @@ setInterval(() => {
   App.get("/api/data", (req, res) => res.json(players));
 
 }, 5000);
-
-
 
 App.post("/reshuffle", (req, res) => {
 
