@@ -7,21 +7,7 @@ const morgan = require("morgan");
 const pg = require("pg");
 require('dotenv').config();
 const fs = require("fs");
-
-
-const {
-  randomizPlayers,
-  readPlayers,
-  getRandomIndex,
-  readPlayerFromDatabase
-} = require("./helperFunctions");
-
-// const { seedPlayers } = require("./db/seeds/players");
-// const { createTables } = require("./db/schema/tables");
-
-// createTables();
-// seedPlayers();
-
+const {randomizPlayers} = require("./helperFunctions");
 
 
 // Express Configuration
@@ -29,6 +15,7 @@ App.use(BodyParser.urlencoded({ extended: false }));
 App.use(BodyParser.json());
 App.use(Express.static("public"));
 
+//This is to make sure in development and production mode communication btw back and front end will be allowed
 const whitelist = [
   "http://localhost:3000",
   "http://localhost:8080",
@@ -54,11 +41,7 @@ App.use(cors(corsOptions));
 // if (process.env.NODE_ENV === "production") {
 // Serve any static files
 App.use(Express.static(path.join(__dirname, "client/build")));
-// Handle React routing, return all requests to React App
 
-// App.get("*", function (req, res) {
-//   res.sendFile(path.join(__dirname, "client/build", "index.html"));
-// });
 // }
 
 
@@ -69,21 +52,19 @@ client.connect();
 
 
 let players = {};
-client.query('SELECT * FROM soccer_indoor;', function (err, result) {
-  for (const row of result.rows) {
+// client.query('SELECT * FROM soccer_indoor;', function (err, result) {
+//   for (const row of result.rows) {
 
-    players[row.team_index] = row.player_name;
-  }
-  client.end();
+//     players[row.team_index] = row.player_name;
+//   }
+//   client.end();
 
-});
+// });
 
-App.get("/api/data", (req, res) => res.json(players));
-console.log("main api call", players);
+// App.get("/api/data", (req, res) => res.json(players));
+// console.log("main api call", players);
 
 setInterval(() => {
-  
-
   const conString = process.env.DATABASE_URL_ELEPHANT;
   const client = new pg.Client(conString);
 
