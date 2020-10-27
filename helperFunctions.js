@@ -1,11 +1,13 @@
 const fs = require("fs");
+const pg = require("pg");
+require('dotenv').config();
 
 // this function shuffles players
 const randomizPlayers = (playerObject) => {
   const playersArray = Object.values(playerObject);
   const newPlayerjson = {};
 
-  let count = 0;
+  let count = 1;
   while (playersArray.length > 0) {
     const playerIndex = getRandomIndex(playersArray);
     const player = playersArray.splice(playerIndex, 1);
@@ -23,9 +25,13 @@ const readPlayers = (fileName) => {
 };
 
 // this function generates random number
-function getRandomIndex(playerArray) {
-    const max = playerArray.length;
-    return Math.floor(Math.random() * Math.floor(max));
-  }
+const getRandomIndex = (playerArray) => {
+  const max = playerArray.length;
+  return Math.floor(Math.random() * Math.floor(max));
+}
+
+
+
+
 
 module.exports = { randomizPlayers, readPlayers, getRandomIndex };
