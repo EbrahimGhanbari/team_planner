@@ -85,10 +85,7 @@ setInterval(() => {
 App.post("/reshuffle", (req, res) => {
 
   if (Object.keys(req.body)[0] === "1") {
-    // seedPlayers();
     const newPlayersList = randomizPlayers(players);
-    // seedPlayers(newPlayersList);
-
     let query = 'DELETE FROM soccer_indoor;';
     for (const index in newPlayersList) {
       query += `INSERT INTO soccer_indoor (id, player_name, team_index) VALUES (${index}, '${newPlayersList[index]}', ${index});`
@@ -98,19 +95,25 @@ App.post("/reshuffle", (req, res) => {
     const conString = process.env.DATABASE_URL_ELEPHANT;
     const client = new pg.Client(conString);
     client.connect();
-    client.query(query);
-    client.query('SELECT * FROM soccer_indoor;', function (err, result) {
-      console.log('result.rows:', result.rows)
-
-      for (const row of result.rows) {
-        players[row.team_index] = row.player_name;
-      }
-
+    client.query(query, function (err, result) {
       client.end();
-
     });
-    console.log("after re-shuffling", players);
-    App.get("/api/data", (req, res) => res.json(newPlayersList))
+
+    // client.query('SELECT * FROM soccer_indoor;', function (err, result) {
+    //   console.log('result.rows:', result.rows)
+
+    //   for (const row of result.rows) {
+    //     players[row.team_index] = row.player_name;
+    //   }
+
+    //   client.end();
+
+    // });
+
+    // console.log("after re-shuffling", players);
+
+
+    // App.get("/api/data", (req, res) => res.json(newPlayersList))
 
   }
 });
