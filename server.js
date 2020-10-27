@@ -81,7 +81,7 @@ client.query('SELECT * FROM soccer_indoor;', function (err, result) {
 App.get("/api/data", (req, res) => res.json(players));
 
 setInterval(() => {
-  App.get("/api/data", (req, res) => res.json(players));
+  
   let players = {};
   const conString = process.env.DATABASE_URL_ELEPHANT;
   const client = new pg.Client(conString);
@@ -95,6 +95,7 @@ setInterval(() => {
     client.end();
 
   });
+  App.get("/api/data", (req, res) => res.json(players));
 
 }, 5000);
 
