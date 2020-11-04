@@ -36,9 +36,9 @@ const corsOptions = {
 App.use(cors(corsOptions));
 
 // Reading built file in production mode
-if (process.env.NODE_ENV === "production") {
+// if (process.env.NODE_ENV === "production") {
   App.use(Express.static(path.join(__dirname, "client/build")));
-}
+// }
 
 let players = {};
 

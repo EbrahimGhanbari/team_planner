@@ -24,7 +24,7 @@ function App() {
   }, []);
 
   const reshuffle = () => {
-    
+
     const password = prompt('Please enter password');
 
     // event.preventDefault();
@@ -38,7 +38,7 @@ function App() {
       });
   };
 
-  const subs = ["Nasser", "MohammadReza"];
+  const subs = ["Nasser", "Mojtaba", "Ehsan", "Milad Ah", "Saleh"];
 
   return (
     <div>
